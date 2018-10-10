@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">04GameBacklog</string>
+    <string name="title_activity_add_game">AddGameActivity</string>
+    <string name="title">Title</string>
+    <string name="platform">Platform</string>
+    <string name="notes">Notes</string>
+    <string name="name">Name</string>
+    <string name="console_type">Console type</string>
+    <string name="status">Status</string>
+    <string name="date">Date</string>
+
+    <string-array name="status_of_game">
+        <item>Want to play</item>
+        <item>Playing</item>
+        <item>Stalled</item>
+        <item>Dropped</item>
+    </string-array>
+</resources>
