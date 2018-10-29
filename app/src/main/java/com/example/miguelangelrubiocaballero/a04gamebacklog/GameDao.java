@@ -9,7 +9,7 @@ import android.arch.persistence.room.Update;
 import java.util.List;
 
 @Dao
-public interface GameDao {
+public interface GameDao { //data access object
 
     @Query("SELECT * FROM game")
     public List<Games> getAllGames();

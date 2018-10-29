@@ -25,10 +25,10 @@ public class MainActivity extends AppCompatActivity {
     static AppDatabase db;
 
 
-    public final static int TASK_GET_ALL_REMINDERS = 0;
-    public final static int TASK_DELETE_REMINDER = 1;
-    public final static int TASK_UPDATE_REMINDER = 2;
-    public final static int TASK_INSERT_REMINDER = 3;
+    public final static int TASK_GET_ALL_GAMES = 0;
+    public final static int TASK_DELETE_GAME = 1;
+    public final static int TASK_UPDATE_GAME = 2;
+    public final static int TASK_INSERT_GAME = 3;
 
     @BindView(R.id.add_game_floating_button)
     FloatingActionButton mFloatingButton;
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
         db = AppDatabase.getInstance(this);
-        new GameAsyncTask(TASK_GET_ALL_REMINDERS).execute();
+        new GameAsyncTask(TASK_GET_ALL_GAMES).execute();
         mGameList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mGameList.setHasFixedSize(true);
 
@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
 
                         //Get the index corresponding to the selected position
                         int position = (viewHolder.getAdapterPosition());
-                        new GameAsyncTask(TASK_DELETE_REMINDER).execute(mGames.get(position));
+                        new GameAsyncTask(TASK_DELETE_GAME).execute(mGames.get(position));
                         mAdapter.notifyItemRemoved(position);
                     }
 
@@ -73,11 +73,6 @@ public class MainActivity extends AppCompatActivity {
 
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
         itemTouchHelper.attachToRecyclerView(mGameList);
-
-
-
-
-
 
     }
 
@@ -93,11 +88,10 @@ public class MainActivity extends AppCompatActivity {
     void onReminderDbUpdated(List list) {
         mGames = list;
         updateUI();
-
     }
 
     private void updateUI() {
-//        mGames = db.reminderDao().getAllGames();
+//        mGames = db.gameDao().getAllGames();
         if (mAdapter == null) {
             mAdapter = new GameAdapter(this, mGames);
             mGameList.setAdapter(mAdapter);
@@ -106,7 +100,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-
 
 
     public class GameAsyncTask extends AsyncTask<Games, Void, List> {
@@ -120,18 +113,18 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected List doInBackground(Games... games) {
             switch (taskCode) {
-                case TASK_DELETE_REMINDER:
-                    db.reminderDao().deleteGame(games[0]);
+                case TASK_DELETE_GAME:
+                    db.gameDao().deleteGame(games[0]);
                     break;
-                case TASK_UPDATE_REMINDER:
-                    db.reminderDao().updateGame(games[0]);
+                case TASK_UPDATE_GAME:
+                    db.gameDao().updateGame(games[0]);
                     break;
-                case TASK_INSERT_REMINDER:
-                    db.reminderDao().insertGame(games[0]);
+                case TASK_INSERT_GAME:
+                    db.gameDao().insertGame(games[0]);
                     break;
             }
             //To return a new list with the updated data, we get all the data from the database again.
-            return db.reminderDao().getAllGames();
+            return db.gameDao().getAllGames();
         }
 
         @Override
@@ -139,7 +132,6 @@ public class MainActivity extends AppCompatActivity {
             super.onPostExecute(list);
             onReminderDbUpdated(list);
         }
-
 
     }
 }

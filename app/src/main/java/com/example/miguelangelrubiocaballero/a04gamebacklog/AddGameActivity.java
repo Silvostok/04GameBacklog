@@ -33,7 +33,7 @@ public class AddGameActivity extends AppCompatActivity {
     @BindView(R.id.status_spinner)
     Spinner mStatusSpinner;
 
-    public final static int TASK_INSERT_REMINDER = 0;
+    public final static int TASK_INSERT_GAME = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +56,7 @@ public class AddGameActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 Log.i(TAG, "Status check: " + mSelectedStatus);
-                new GamesAsyncTask(TASK_INSERT_REMINDER).execute(new Games(mGameTitle.getText().toString(), mGamePlatform.getText().toString(), mGameNotes.getText().toString(), mStatusSpinner.getSelectedItem().toString()));
+                new GamesAsyncTask(TASK_INSERT_GAME).execute(new Games(mGameTitle.getText().toString(), mGamePlatform.getText().toString(), mGameNotes.getText().toString(), mStatusSpinner.getSelectedItem().toString()));
 
                 Intent resultIntent = new Intent();
                 setResult(Activity.RESULT_OK, resultIntent);
@@ -73,31 +73,26 @@ public class AddGameActivity extends AppCompatActivity {
 
         GamesAsyncTask(int taskCode) {
             this.taskCode = taskCode;
-
         }
 
         @Override
         protected List doInBackground(Games... games) {
             switch (taskCode) {
-                case TASK_INSERT_REMINDER:
-                    db.reminderDao().insertGame(games[0]);
+                case TASK_INSERT_GAME:
+                    db.gameDao().insertGame(games[0]);
                     break;
 
             }
             //To return a new list with the updated data, we get all the data from the database again.
-            return db.reminderDao().getAllGames();
+            return db.gameDao().getAllGames();
         }
 
         @Override
-
         protected void onPostExecute(List list) {
             super.onPostExecute(list);
 
         }
 
     }
-
-
-
 
 }

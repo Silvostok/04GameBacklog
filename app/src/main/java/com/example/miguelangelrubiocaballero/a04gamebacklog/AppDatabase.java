@@ -9,16 +9,16 @@ import android.content.Context;
 @Database(entities = {Games.class}, version = 1 , exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
-    public abstract GameDao reminderDao();
+    public abstract GameDao gameDao();
 
     private final static String NAME_DATABASE = "game_db";
 
+    //Static instance
     private static AppDatabase sInstance;
 
     public static AppDatabase getInstance(Context context) {
 
         if (sInstance == null) {
-
             sInstance = Room.databaseBuilder(context, AppDatabase.class, NAME_DATABASE).build();
         }
 

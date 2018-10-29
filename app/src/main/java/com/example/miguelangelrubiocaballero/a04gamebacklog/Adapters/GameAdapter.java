@@ -33,10 +33,10 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.ViewHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull GameAdapter.ViewHolder holder, int position) {
-        Calendar calander = Calendar.getInstance();
-        int cDay = calander.get(Calendar.DAY_OF_MONTH);
-        int cMonth = calander.get(Calendar.MONTH) + 1;
-        int cYear = calander.get(Calendar.YEAR);
+        Calendar calendar = Calendar.getInstance();
+        int cDay = calendar.get(Calendar.DAY_OF_MONTH);
+        int cMonth = calendar.get(Calendar.MONTH) + 1;
+        int cYear = calendar.get(Calendar.YEAR);
         Games games = mGames.get(position);
         holder.mGameName.setText(games.mGameTitle);
         holder.mConsoleName.setText(games.mPlatformTitle);
@@ -53,6 +53,7 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.ViewHolder>{
     public void swapList(List<Games> newList) {
         mGames = newList;
         if (newList != null) {
+            // Force the RecyclerView to refresh
             this.notifyDataSetChanged();
         }
     }
