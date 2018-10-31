@@ -11,14 +11,14 @@ public class ViewHolder extends RecyclerView.ViewHolder {
     public TextView mGameName;
     public TextView mConsoleName;
     public TextView mGameStatus;
-
+    public TextView mDate;
 
     public ViewHolder(View itemView) {
         super(itemView);
         mGameName = itemView.findViewById(R.id.game_name);
         mConsoleName = itemView.findViewById(R.id.console_type);
         mGameStatus = itemView.findViewById(R.id.game_status);
-
+        mDate = itemView.findViewById(R.id.date);
     }
 
 

@@ -8,8 +8,10 @@ import android.arch.persistence.room.Update;
 
 import java.util.List;
 
+
+//data access object using an interface
 @Dao
-public interface GameDao { //data access object
+public interface GameDao {
 
     @Query("SELECT * FROM game")
     public List<Games> getAllGames();

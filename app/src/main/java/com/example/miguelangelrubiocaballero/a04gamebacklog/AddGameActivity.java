@@ -24,6 +24,8 @@ public class AddGameActivity extends AppCompatActivity {
     static AppDatabase db;
     private String mSelectedStatus;
 
+
+    //find and automatically cast the corresponding view in the layout
     @BindView(R.id.txtTitle)
     EditText mGameTitle;
     @BindView(R.id.txtPlatform)
@@ -42,6 +44,7 @@ public class AddGameActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //bind all views on this activity
         ButterKnife.bind(this);
         db = AppDatabase.getInstance(this);
 
@@ -55,14 +58,14 @@ public class AddGameActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Log.i(TAG, "Status check: " + mSelectedStatus);
+                //Log.i(TAG, "Status check: " + mSelectedStatus);
                 new GamesAsyncTask(TASK_INSERT_GAME).execute(new Games(mGameTitle.getText().toString(), mGamePlatform.getText().toString(), mGameNotes.getText().toString(), mStatusSpinner.getSelectedItem().toString()));
 
                 Intent resultIntent = new Intent();
                 setResult(Activity.RESULT_OK, resultIntent);
                 finish();
 
-                Log.i(TAG, "onClick: Inserted ");
+                //Log.i(TAG, "onClick: Inserted ");
             }
         });
     }
@@ -81,7 +84,6 @@ public class AddGameActivity extends AppCompatActivity {
                 case TASK_INSERT_GAME:
                     db.gameDao().insertGame(games[0]);
                     break;
-
             }
             //To return a new list with the updated data, we get all the data from the database again.
             return db.gameDao().getAllGames();

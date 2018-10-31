@@ -20,8 +20,8 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.ViewHolder>{
     private Context mContext;
 
     public GameAdapter(Context mContext, List<Games> mGames) {
-        this.mGames = mGames;
         this.mContext = mContext;
+        this.mGames = mGames;
     }
 
     @NonNull

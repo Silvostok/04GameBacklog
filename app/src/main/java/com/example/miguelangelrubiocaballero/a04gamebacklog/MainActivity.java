@@ -30,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
     public final static int TASK_UPDATE_GAME = 2;
     public final static int TASK_INSERT_GAME = 3;
 
+
+
     @BindView(R.id.add_game_floating_button)
     FloatingActionButton mFloatingButton;
     @BindView(R.id.gameList)
@@ -58,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
                         return false;
                     }
 
-                    //Called when a user swipes left or right on a ViewHolder
+                    //Called when a user swipes left or right on a GameViewHolder
                     @Override
                     public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
 
@@ -98,14 +100,12 @@ public class MainActivity extends AppCompatActivity {
         } else {
             mAdapter.swapList(mGames);
         }
-
     }
 
 
     public class GameAsyncTask extends AsyncTask<Games, Void, List> {
 
         private int taskCode;
-
         public GameAsyncTask(int taskCode) {
             this.taskCode = taskCode;
         }
@@ -132,6 +132,5 @@ public class MainActivity extends AppCompatActivity {
             super.onPostExecute(list);
             onReminderDbUpdated(list);
         }
-
     }
 }
