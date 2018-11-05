@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     public final static int TASK_INSERT_GAME = 3;
 
 
-
+    //find and automatically cast the corresponding view in the layout
     @BindView(R.id.add_game_floating_button)
     FloatingActionButton mFloatingButton;
     @BindView(R.id.gameList)
@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //bind all views on this activity
         ButterKnife.bind(this);
         db = AppDatabase.getInstance(this);
         new GameAsyncTask(TASK_GET_ALL_GAMES).execute();
@@ -54,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
         ItemTouchHelper.SimpleCallback simpleItemTouchCallback =
                 new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+
                     @Override
                     public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder
                             target) {
@@ -70,7 +72,6 @@ public class MainActivity extends AppCompatActivity {
                         mAdapter.notifyItemRemoved(position);
                     }
 
-
                 };
 
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
@@ -79,11 +80,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
     @OnClick(R.id.add_game_floating_button)
     public void goToAddPage() {
         startActivityForResult(new Intent(MainActivity.this, AddGameActivity.class), REQUEST_CODE);
-
     }
 
 
@@ -93,7 +92,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateUI() {
-//        mGames = db.gameDao().getAllGames();
         if (mAdapter == null) {
             mAdapter = new GameAdapter(this, mGames);
             mGameList.setAdapter(mAdapter);

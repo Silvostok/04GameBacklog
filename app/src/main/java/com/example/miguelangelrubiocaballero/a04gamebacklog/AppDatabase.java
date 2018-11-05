@@ -13,16 +13,13 @@ public abstract class AppDatabase extends RoomDatabase {
 
     private final static String NAME_DATABASE = "game_db";
 
-    //Static instance
+    //Singleton
     private static AppDatabase sInstance;
 
     public static AppDatabase getInstance(Context context) {
-
         if (sInstance == null) {
             sInstance = Room.databaseBuilder(context, AppDatabase.class, NAME_DATABASE).build();
         }
-
         return sInstance;
     }
-
 }

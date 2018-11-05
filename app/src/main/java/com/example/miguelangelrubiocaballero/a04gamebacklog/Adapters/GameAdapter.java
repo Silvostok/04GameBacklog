@@ -53,7 +53,7 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.ViewHolder>{
     public void swapList(List<Games> newList) {
         mGames = newList;
         if (newList != null) {
-            // Force the RecyclerView to refresh
+           //update changes
             this.notifyDataSetChanged();
         }
     }
