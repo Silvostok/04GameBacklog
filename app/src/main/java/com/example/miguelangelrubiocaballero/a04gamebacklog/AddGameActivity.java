@@ -23,7 +23,7 @@ public class AddGameActivity extends AppCompatActivity {
     private static final String TAG = AddGameActivity.class.getSimpleName();
     static AppDatabase db;
     private String mSelectedStatus;
-    
+
     //find and automatically cast the corresponding view in the layout
     @BindView(R.id.txtTitle)
     EditText mGameTitle;
@@ -52,13 +52,13 @@ public class AddGameActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mStatusSpinner.setAdapter(adapter);
 
+        // save button
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 new GamesAsyncTask(TASK_INSERT_GAME).execute(new Games(mGameTitle.getText().toString(), mGamePlatform.getText().toString(), mGameNotes.getText().toString(), mStatusSpinner.getSelectedItem().toString()));
-
                 Intent resultIntent = new Intent();
                 setResult(Activity.RESULT_OK, resultIntent);
                 finish();
